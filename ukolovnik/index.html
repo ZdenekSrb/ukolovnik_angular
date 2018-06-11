@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Úkolovník</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+        <script type="text/javascript" src="js/controllers.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
+    </head>
+    <body ng-controller="FrameworksController">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-3">
+                    <h1>Ukolovník pomocí Angularu</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                            <form ng-submit="addFramework()">
+                                <input type="text" ng-model="data.name" placeholder="Zadejte název úkolu" class="form-control" />
+                                <br>
+                                <input type="submit" value="Přidat úkol" class="btn btn-primary" />
+                            </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-9">
+                    <input type="text" placeholder="vyhledat úkol podle názvu" id="search" ng-model="searchQuery" class="form-control" />
+                </div>
+                <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th ng-click="orderProp = 'id'; reverse = !reverse;" class="id">ID</th>
+                            <th ng-click="orderProp = 'name'; reverse = !reverse;" class="name">Úkol</th>
+                            <th>Vyřešit úkol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="fw in frameworks | filter:searchQuery | orderBy:orderProp:reverse">
+                            <td>{{fw.id}}</td>
+                            <td>{{fw.name}}</td>
+                            <td class="action"><a href="#" ng-click="frameworks.splice($index,1)">X</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
